@@ -105,6 +105,26 @@ if __name__ == '__main__':
                 output('opening edge')
             elif 'close' in text:
                 AppOpener.close("msedge", match_closest=True)
+            elif 'search' in text:
+                s1 = text.split()
+                s1.remove("search")
+                s1.remove("in")
+                s1.remove("edge")
+                s2=" ".join(s1)
+                edge_options = EdgeOptions()
+                edge_options.use_chromium = True
+                edge_options.add_argument("start-maximized")
+                driver = Edge(executable_path="C:\\Users\\ranke\\Harsha\\webdrivers\\edgedriver_win64\\msedgedriver.exe")
+                driver.get("https://www.bing.com")
+                search_bar = driver.find_element(By.NAME, "q")
+                search_bar.send_keys(s2)
+                search_bar.submit()
+                time.sleep(3)
+                first_result = driver.find_element(By.CSS_SELECTOR,"h2")
+                first_result.click()
+                time.sleep(10)
+            elif 'close search' in text:
+                driver.close()
         elif 'telegram' in text:
             if 'open' in text:
                 AppOpener.open("Telegram", match_closest=True)
