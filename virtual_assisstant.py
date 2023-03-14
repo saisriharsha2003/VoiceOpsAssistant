@@ -48,10 +48,23 @@ if __name__ == '__main__':
             elif 'close' in text:
                 AppOpener.close("google chrome", match_closest=True)
             elif 'search' in text:
-                output('what should i search for you')
-                chromepath = "C:\\Program Files\\Google\\Chrome\\Application %s"
-                search1 = inputCommand().lower()
-                wb.open_new_tab(search1)
+                s1=text.split()
+                s1.remove("search")
+                s1.remove("in")
+                s1.remove("chrome")
+                s2=" ".join(s1)
+                driver = webdriver.Chrome("C:\\Users\\ranke\\Downloads\\chromedriver_win32\\chromedriver.exe")
+                driver.maximize_window()
+                driver.get("http://www.google.com")
+                search_bar = driver.find_element(By.NAME, "q")
+                search_bar.send_keys(s2)
+                search_bar.submit()
+                time.sleep(3)
+                first_result = driver.find_element(By.CSS_SELECTOR, "h3")
+                first_result.click()
+                time.sleep(3)
+            elif 'close search' in text:
+                driver.close()
         elif 'youtube' in text:
             if 'play' in text:
                 v1=inputCommand().lower()
