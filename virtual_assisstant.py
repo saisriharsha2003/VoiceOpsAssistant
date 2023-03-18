@@ -55,7 +55,7 @@ if __name__ == '__main__':
         print(text)
         if text == 0:
             continue
-            
+        #chrome automation and web browsing    
         elif 'chrome' in text or 'google' in text:
             if 'open' in text:
                 AppOpener.open("google chrome", match_closest=True)
@@ -75,13 +75,25 @@ if __name__ == '__main__':
                 time.sleep(3)
             elif 'close search' in text:
                 driver.close()
-                
+        #youtube automation         
         elif 'youtube' in text:
             if 'play' in text:
                 output("which video or movie should i play for you sir?")
                 video=inputCommand()
                 pywhatkit.playonyt(video)
-                
+        #email automation      
+        elif 'mail' in text:
+            if 'open' in text:
+                AppOpener.open("mail")
+            elif 'send' in text:
+                s1=text.split()
+                s1.remove("send")
+                s1.remove("mail")
+                s1.remove("to")
+                s3="".join(s1)
+                msg=inputCommand()
+                pywhatkit.send_mail("rankelassh@gmail.com","nwpmbjhunqhtjgdb","Testing",msg,s1)
+        #whatsapp automation        
         elif 'send' in text and 'whatsapp' in text:
             output("For whom should i send the message sir?")
             name=inputCommand()
@@ -100,13 +112,13 @@ if __name__ == '__main__':
             output("What message should i send to {}".format(name))
             message=inputCommand()
             pywhatkit.sendwhatmsg_instantly(phone_number,message)
-            
+        #opening vs code    
         elif 'vs code' in text or 'visual studio code' in text:
             if 'open' in text:
                 AppOpener.open("visual studio code", match_closest=True)
             elif 'close' in text:
                 AppOpener.close("visual studio code", match_closest=True)
-                
+        #capturing photo        
         elif 'camera' in text:
             if 'open' in text:
                 AppOpener.open("camera", match_closest=True)
@@ -120,7 +132,7 @@ if __name__ == '__main__':
                 cv2.waitKey(5000)
                 cam.release()
                 cv2.destroyWindow("photo")
-                
+        #edge automation and web browsing using selenium      
         elif 'edge' in text:
             if 'open' in text:
                 AppOpener.open("msedge", match_closest=True)
@@ -143,21 +155,20 @@ if __name__ == '__main__':
                 time.sleep(10)
             elif 'close search' in text:
                 driver.close()
-                
+        #opening telegram        
         elif 'telegram' in text:
             if 'open' in text:
                 AppOpener.open("Telegram", match_closest=True)
             elif 'close' in text:
                 AppOpener.close("Telegram", match_closest=True)
-         
+        #quiting virtual assisstant
         elif "stop" in text or "exit" in text or "bye" in text:
             output("Ok Bye Sir")
             break
-            
+        #time     
         elif 'time' in text:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            output(f"the time is {strTime}")  
-            
+            output(f"the time is {strTime}")      
         else:
             output("Could you please repeat again")
         
