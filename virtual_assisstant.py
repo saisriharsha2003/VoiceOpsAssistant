@@ -33,12 +33,25 @@ def inputCommand():
             output("Sorry,I can't hear you!")
     return query
 
+def inputCommand1():
+    rec = sr.Recognizer()
+    query = ""
+    with sr.Microphone() as source:
+        rec.pause_threshold = 5
+        output("How can i help you Sir?")
+        # rec.adjust_for_ambient_noise(source)
+        audio = rec.listen(source)
+        try:
+            query = rec.recognize_google(audio, language="en-IN")
+        except Exception as e:
+            output("Sorry,I can't hear you!")
+    return query
 
 if __name__ == '__main__':
     output("Hello {}! I am your personal desktop assistant".format(user))
     while 1:
         r = sr.Recognizer()
-        text = inputCommand().lower()
+        text = inputCommand1().lower()
         print(text)
         if text == 0:
             continue
