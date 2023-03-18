@@ -67,9 +67,9 @@ if __name__ == '__main__':
                 driver.close()
         elif 'youtube' in text:
             if 'play' in text:
-                v1=inputCommand().lower()
-                v1.replace(' ','+')
-                pywhatkit.playonyt(v1)
+                output("which video or movie should i play for you sir?")
+                video=inputCommand()
+                pywhatkit.playonyt(video)
 
         elif 'vs code' in text or 'visual studio code' in text:
             if 'open' in text:
