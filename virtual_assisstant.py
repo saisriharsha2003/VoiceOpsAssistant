@@ -82,29 +82,7 @@ if __name__ == '__main__':
                 time.sleep(3)
             elif 'close search' in text:
                 driver.close() 
-        #linkedin automation        
-        elif 'linkedin' in text:
-            output("which linkedin profile should i search for you sir?")
-            s=inputCommand()
-            driver = webdriver.Chrome()
-            driver.maximize_window()
-            driver.get("https://www.linkedin.com")
-            time.sleep(3)
-            result = driver.find_element(By.NAME, "session_key")
-            result.send_keys("saisriharsha.r@gmail.com")
-            result1 = driver.find_element(By.NAME, "session_password")
-            result1.send_keys("Harsha@05")
-            result2 = driver.find_element(By.XPATH, "/html/body/main/section[1]/div/div/form[1]/div[2]/button")
-            result2.click()
-            time.sleep(5)
-            s2 = driver.find_element(By.XPATH, "/html/body/div[5]/header/div/div/div/div[1]/input")
-            s2.send_keys(s)
-            s2.send_keys(Keys.ENTER)
-            driver.implicitly_wait(5)
-            s3 = driver.find_element(By.XPATH, "/html/body/div[5]/div[3]/div[2]/div/div[1]/main/div/div/div[1]/div/ul/li/div/a/div/div[1]/div[1]/div/div/span[1]/span/a/span/span[1]")
-            s3.click()
-            time.sleep(10)    
-        #whatsapp automation
+        
         elif 'send' in text and 'whatsapp' in text:
             output("For whom should i send the message sir?")
             name=inputCommand()
