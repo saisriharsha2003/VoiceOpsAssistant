@@ -81,6 +81,25 @@ def capture_photo():
     cam.release()
     cv2.destroyWindow("photo")
 
+def send_whatsapp_message():
+    output("For whom should i send the message sir?")
+    name = inputCommand()
+    with open('all contacts .vcf') as f:
+        vcards = vobject.readComponents(f.read())
+    l = []
+    for vcard in vcards:
+        if hasattr(vcard, 'fn') and vcard.fn.value.lower() == name.lower():
+            if hasattr(vcard, 'tel') and vcard.tel:
+                for p_no in vcard.contents['tel']:
+                    ph_no = str(p_no.value)
+                    l.append(ph_no)
+    phone_number = l[0]
+    if len(phone_number) < 13:
+        phone_number = "+91" + phone_number
+    output("What message should i send to {}".format(name))
+    message = inputCommand()
+    pywhatkit.sendwhatmsg_instantly(phone_number, message)
+
         
 
 if __name__ == '__main__':
@@ -97,24 +116,7 @@ if __name__ == '__main__':
                 chrome_search()
         
         elif 'send' in text and 'whatsapp' in text:
-            output("For whom should i send the message sir?")
-            name=inputCommand()
-            with open('all contacts .vcf') as f:
-                vcards = vobject.readComponents(f.read())
-            l=[]
-            for vcard in vcards:
-                if hasattr(vcard, 'fn') and vcard.fn.value.lower() == name.lower():
-                    if hasattr(vcard, 'tel') and vcard.tel:
-                        for p_no in vcard.contents['tel']:
-                            ph_no = str(p_no.value)
-                            l.append(ph_no)
-            phone_number=l[0]
-            if len(phone_number)<13:
-                phone_number="+91"+phone_number
-            output("What message should i send to {}".format(name))
-            message=inputCommand()
-            pywhatkit.sendwhatmsg_instantly(phone_number,message)    
-        #email automation
+            send_whatsapp_message()
         elif 'mail' in text:
             if 'open' in text:
                 AppOpener.open("mail")
