@@ -188,13 +188,6 @@ if __name__ == '__main__':
                 time.sleep(10)
             elif 'close search' in text:
                 driver.close() 
-        #opening telegram               
-        elif 'telegram' in text:
-            if 'open' in text:
-                AppOpener.open("Telegram", match_closest=True)
-            elif 'close' in text:
-                AppOpener.close("Telegram", match_closest=True)
-        #quiting virtual assisstant
         elif "stop" in text or "exit" in text or "bye" in text:
             output("Ok Bye Sir")
             break
