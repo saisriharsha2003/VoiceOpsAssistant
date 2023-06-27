@@ -64,6 +64,12 @@ def chrome_search():
     first_result = next(search_results, None)
     if first_result:
         wb.open(first_result)
+
+# playing YouTube video
+def play_video_in_youtube():
+    output("which video or movie should i play for you sir?")
+    video = inputCommand()
+    pywhatkit.playonyt(video)
         
 
 if __name__ == '__main__':
@@ -112,9 +118,7 @@ if __name__ == '__main__':
         #youtube automation
         elif 'youtube' in text:
             if 'play' in text:
-                output("which video or movie should i play for you sir?")
-                video=inputCommand()
-                pywhatkit.playonyt(video)  
+                play_video_in_youtube()
         elif 'camera' in text:
             if 'open' in text:
                 AppOpener.open("camera", match_closest=True)
