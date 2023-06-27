@@ -141,13 +141,6 @@ if __name__ == '__main__':
                 output("which video or movie should i play for you sir?")
                 video=inputCommand()
                 pywhatkit.playonyt(video)  
-        #opening visual studio code      
-        elif 'vs code' in text or 'visual studio code' in text:
-            if 'open' in text:
-                AppOpener.open("visual studio code", match_closest=True)
-            elif 'close' in text:
-                AppOpener.close("visual studio code", match_closest=True)
-        #capturing photo
         elif 'camera' in text:
             if 'open' in text:
                 AppOpener.open("camera", match_closest=True)
