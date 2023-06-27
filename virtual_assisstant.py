@@ -100,6 +100,15 @@ def send_whatsapp_message():
     message = inputCommand()
     pywhatkit.sendwhatmsg_instantly(phone_number, message)
 
+# sending_email
+def send_mail():
+    output("To whom should i send an email Sir?")
+    target_email = inputCommand()
+    print(target_email)
+    output("Which msg should i send to" + target_email)
+    msg = inputCommand()
+    print(msg)
+    pywhatkit.send_mail("rankelassh@gmail.com", "nwpmbjhunqhtjgdb", "Testing", msg, target_email)
         
 
 if __name__ == '__main__':
@@ -109,34 +118,21 @@ if __name__ == '__main__':
         text = inputCommand1().lower()
         print(text)
         if text == 0:
-            continue   
-        #chrome automation and web browsing         
+            continue            
         elif 'chrome' in text or 'google' in text:
             if 'search' in text:
                 chrome_search()
-        
         elif 'send' in text and 'whatsapp' in text:
             send_whatsapp_message()
         elif 'mail' in text:
-            if 'open' in text:
-                AppOpener.open("mail")
-            elif 'send' in text:
-                s1=text.split()
-                s1.remove("send")
-                s1.remove("mail")
-                s1.remove("to")
-                s3="".join(s1)
-                msg=inputCommand()
-                pywhatkit.send_mail("rankelassh@gmail.com","nwpmbjhunqhtjgdb","Testing",msg,s1)
-        #youtube automation
+            if 'send' in text:
+                send_email()
         elif 'youtube' in text:
             if 'play' in text:
                 play_video_in_youtube()
         elif 'camera' in text:
             if 'capture photo' in text:
-                capture_photo()    
-            elif 'close search' in text:
-                driver.close() 
+                capture_photo()     
         elif "stop" in text or "exit" in text or "bye" in text:
             output("Ok Bye Sir")
             break
