@@ -70,6 +70,17 @@ def play_video_in_youtube():
     output("which video or movie should i play for you sir?")
     video = inputCommand()
     pywhatkit.playonyt(video)
+
+# capturing photo
+def capture_photo():
+    c_port = 0
+    cam = cv2.VideoCapture(c_port)
+    result, image = cam.read()
+    cv2.imshow('photo', image)
+    cv2.waitKey(5000)
+    cam.release()
+    cv2.destroyWindow("photo")
+
         
 
 if __name__ == '__main__':
@@ -120,18 +131,8 @@ if __name__ == '__main__':
             if 'play' in text:
                 play_video_in_youtube()
         elif 'camera' in text:
-            if 'open' in text:
-                AppOpener.open("camera", match_closest=True)
-            elif 'close' in text:
-                AppOpener.close("camera", match_closest=True)
-            elif 'capture photo' in text:
-                c_port = 0
-                cam = cv2.VideoCapture(c_port)
-                result, image = cam.read()       
-                cv2.imshow('photo', image)
-                cv2.waitKey(5000)
-                cam.release()
-                cv2.destroyWindow("photo")    
+            if 'capture photo' in text:
+                capture_photo()    
             elif 'close search' in text:
                 driver.close() 
         elif "stop" in text or "exit" in text or "bye" in text:
