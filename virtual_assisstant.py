@@ -53,6 +53,19 @@ def inputCommand1():
             output("Sorry,I can't hear you!")
     return query
 
+# chrome searching
+def chrome_search():
+    output("what should i search for you sir?")
+    chrome_query = inputCommand()
+    res = "searching" + chrome_query + " for you sir...."
+    print(res)
+    output(res)
+    search_results = search(query, num_results=1)
+    first_result = next(search_results, None)
+    if first_result:
+        wb.open(first_result)
+        
+
 if __name__ == '__main__':
     output("Hello Sir! I am your personal desktop assistant")
     while 1:
@@ -63,25 +76,8 @@ if __name__ == '__main__':
             continue   
         #chrome automation and web browsing         
         elif 'chrome' in text or 'google' in text:
-            if 'open' in text:
-                AppOpener.open("google chrome", match_closest=True)
-            elif 'close' in text:
-                AppOpener.close("google chrome", match_closest=True)
-            elif 'search' in text:
-                output("what should i search for you sir?")
-                s2=inputCommand()
-                driver = webdriver.Chrome("C:\\Users\\ranke\\Downloads\\chromedriver_win32\\chromedriver.exe")
-                driver.maximize_window()
-                driver.get("http://www.google.com")
-                search_bar = driver.find_element(By.NAME, "q")
-                search_bar.send_keys(s2)
-                search_bar.submit()
-                time.sleep(3)
-                first_result = driver.find_element(By.CSS_SELECTOR, "h3")
-                first_result.click()
-                time.sleep(3)
-            elif 'close search' in text:
-                driver.close() 
+            if 'search' in text:
+                chrome_search()
         
         elif 'send' in text and 'whatsapp' in text:
             output("For whom should i send the message sir?")
