@@ -1,13 +1,16 @@
-import pafy
+import subprocess
 
-# specify the YouTube video URL
-url = "https://www.youtube.com/watch?v=0n7AWxYCj9I"
 
-# create a pafy object
-video = pafy.new(url)
+def download_audio(url):
+    # Command to download audio using ffmpeg
+    command = ['ffmpeg', '-i', url, '-vn', '-acodec', 'copy', 'audio.mp3']
 
-# get the audio stream
-audio = video.getbestaudio()
+    try:
+        # Execute the command
+        subprocess.check_output(command)
+        print("Audio downloaded successfully!")
+    except subprocess.CalledProcessError as e:
+        print("Error:", e.output)
 
-# download the audio stream
-audio.download(filepath="path/to/output/directory/audio_file_name.mp3")
+
+download_audio("https://www.youtube.com/watch?v=t_aO4EMP-i0")

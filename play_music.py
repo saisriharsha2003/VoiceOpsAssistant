@@ -23,8 +23,6 @@ def play_music_online(music_name):
         # Open the video in the default web browser
         print(f'https://www.youtube.com/watch?v={video_id}')
         webbrowser.open(f'https://www.youtube.com/watch?v={video_id}')
-
-
     except HttpError as e:
         print(f'An error occurred: {e}')
 
