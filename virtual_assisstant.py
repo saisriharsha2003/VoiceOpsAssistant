@@ -43,16 +43,21 @@ def inputCommand():
 def inputCommand1():
     rec = sr.Recognizer()
     query1 = ""
-    with sr.Microphone() as source:
-        rec.pause_threshold = 1
-        output("How can i help you Sir?")
-        rec.adjust_for_ambient_noise(source)
-        audio = rec.listen(source)
-        try:
-            query1 = rec.recognize_google(audio, language="en-IN")
-        except Exception as e:
-            output("Sorry,I can't hear you!")
+    count = 0
+    while count < 1:
+        with sr.Microphone() as source:
+            rec.pause_threshold = 1
+            output("How can i help you Sir?")
+            rec.adjust_for_ambient_noise(source)
+            audio = rec.listen(source)
+            try:
+                query1 = rec.recognize_google(audio, language="en-IN")
+                count += 1
+            except Exception as e:
+                output("Sorry,I can't hear you!")
+
     return query1
+
 
 
 # chrome searching
