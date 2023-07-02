@@ -6,6 +6,7 @@ import pywhatkit
 import speech_recognition as sr
 import vobject
 from googlesearch import search
+import os
 
 user = "harsha"
 assistant = 'Jarvis'
@@ -101,6 +102,20 @@ def send_whatsapp_message():
     pywhatkit.sendwhatmsg_instantly(phone_number, message)
 
 
+def find_file_path():
+    output("What is th file name?")
+    file = inputCommand()
+    output("What is the extension of the file")
+    extension = inputCommand()
+    file_name = file + '.' + extension
+    for root, dirs, files in os.walk('/'):
+        if file_name in files:
+            file_extension = os.path.splitext(file_name)[1]
+            print(file_extension)
+            return os.path.abspath(os.path.join(root, file_name))
+    return None
+
+
 # sending_email
 def send_mail():
     output("To whom should i send an email Sir?")
@@ -134,6 +149,8 @@ if __name__ == '__main__':
         elif 'camera' in query:
             if 'capture a photo' in query:
                 capture_photo()
+        elif 'search' in query and 'file' in query:
+            find_file_path()
         # quiting virtual assistant
         elif "stop" in query or "exit" in query or "bye" in query:
             output("Ok Bye Sir")
