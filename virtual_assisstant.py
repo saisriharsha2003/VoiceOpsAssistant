@@ -7,6 +7,7 @@ import speech_recognition as sr
 import vobject
 from googlesearch import search
 import os
+from translate import Translator
 
 user = "harsha"
 assistant = 'Jarvis'
@@ -115,6 +116,18 @@ def find_file_path():
             return os.path.abspath(os.path.join(root, file_name))
     return None
 
+def perform_translation():
+    output("what is the source language")
+    source = inputCommand()
+    output("what is the target language")
+    target = inputCommand()
+    output("what should i translate for you")
+    text = inputCommand()
+    translator = Translator(from_lang=source, to_lang=target)
+    translation = translator.translate(text)
+    print(translation)
+    output(translation)
+
 
 # sending_email
 def send_mail():
@@ -146,6 +159,8 @@ if __name__ == '__main__':
         elif 'youtube' in query:
             if 'play' in query:
                 play_video_in_youtube()
+        elif 'translate' in query:
+            perform_translation()
         elif 'camera' in query:
             if 'capture a photo' in query:
                 capture_photo()
