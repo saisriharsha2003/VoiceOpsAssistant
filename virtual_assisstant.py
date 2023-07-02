@@ -172,6 +172,6 @@ if __name__ == '__main__':
             break
         elif 'time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            output(f"the time is {strTime}")
+            output(f"Now the time is {strTime}")
         else:
             output("Could you please repeat again")
