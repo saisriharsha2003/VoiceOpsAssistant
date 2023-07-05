@@ -1,16 +1,17 @@
-import subprocess
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
 
+# Set up authentication
+scope = "user-read-playback-state,user-modify-playback-state"
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
-def download_audio(url):
-    # Command to download audio using ffmpeg
-    command = ['ffmpeg', '-i', url, '-vn', '-acodec', 'copy', 'audio.mp3']
-
-    try:
-        # Execute the command
-        subprocess.check_output(command)
-        print("Audio downloaded successfully!")
-    except subprocess.CalledProcessError as e:
-        print("Error:", e.output)
-
-
-download_audio("https://www.youtube.com/watch?v=t_aO4EMP-i0")
+# Search for a song
+song_name = "Enter Sandman"  # Replace with the name of the song you want to play
+results = sp.search(q=song_name, type="track", limit=1)
+if len(results["tracks"]["items"]) > 0:
+    song_uri = results["tracks"]["items"][0]["uri"]
+    # Play the song
+    sp.start_playback(uris=[song_uri])
+    print("Playing:", song_name)
+else:
+    print("Song not found.")
