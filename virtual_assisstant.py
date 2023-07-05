@@ -1,6 +1,7 @@
 import datetime
 import webbrowser as wb
 import cv2
+import pyautogui
 import pyttsx3
 import pywhatkit
 import speech_recognition as sr
@@ -20,6 +21,8 @@ assistant.setProperty("voice", voices[0].id)
 def output(audio):
     assistant.say(audio)
     assistant.runAndWait()
+
+
 
 
 def inputCommand():
@@ -59,7 +62,6 @@ def inputCommand1():
     return query1
 
 
-
 # chrome searching
 def chrome_search():
     output("what should i search for you sir?")
@@ -80,15 +82,18 @@ def play_video_in_youtube():
     pywhatkit.playonyt(video)
 
 
+def screenshot():
+    im = pyautogui.screenshot()
+    im.save("screenshot.jpg")
+
 # capturing photo
 def capture_photo():
-    c_port = 0
-    cam = cv2.VideoCapture(c_port)
-    result, image = cam.read()
-    cv2.imshow('photo', image)
-    cv2.waitKey(5000)
-    cam.release()
-    cv2.destroyWindow("photo")
+    pyautogui.press("super")
+    pyautogui.typewrite("camera")
+    pyautogui.press("enter")
+    pyautogui.sleep(2)
+    output("SMILE")
+    pyautogui.press("enter")
 
 
 # sending whatsapp message
@@ -124,6 +129,7 @@ def find_file_path():
             print(file_extension)
             return os.path.abspath(os.path.join(root, file_name))
     return None
+
 
 def perform_translation():
     output("what is the source language")
@@ -173,6 +179,8 @@ if __name__ == '__main__':
         elif 'camera' in query:
             if 'capture a photo' in query:
                 capture_photo()
+        elif 'screenshot' in query:
+            screenshot()
         elif 'search' in query and 'file' in query:
             find_file_path()
         # quiting virtual assistant
