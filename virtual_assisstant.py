@@ -60,6 +60,12 @@ def inputCommand1():
     return query1
 
 
+#todo: alarm
+#todo: youtube controls
+#todo: interrnet speed
+#todo: play audio music
+#todo :date
+
 # chrome searching
 def chrome_search():
     output("what should i search for you sir?")
@@ -180,9 +186,9 @@ if __name__ == '__main__':
                 capture_photo()
         elif 'screenshot' in query:
             screenshot()
+
         elif 'search' in query and 'file' in query:
             find_file_path()
-        # quiting virtual assistant
         elif "stop" in query or "exit" in query or "bye" in query:
             output("Ok Bye Sir")
             break
