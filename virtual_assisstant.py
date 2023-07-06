@@ -65,6 +65,14 @@ def inputCommand1():
 # todo: interrnet speed
 # todo: play audio music
 # todo :date
+# todo : location
+# todo: chrome-new tab,switch tab,switch window, close tab,cloase window
+# todo : temperature
+# todo: meaning of the word
+# todo : daily news
+# todo : wakeup function
+# todo: passward authentication
+
 
 # chrome searching
 def chrome_search():
