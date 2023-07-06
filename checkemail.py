@@ -1,6 +1,9 @@
-def findLongWord(input1):
-    if len(input1)<=10:
-        return input1
-    else:
-        return input1[0]+str(len(input1)-2)+input1[-1]
-print(findLongWord("internationalization"))
+import pyautogui
+
+pyautogui.press("super")
+pyautogui.typewrite("camera")
+pyautogui.press("enter")
+pyautogui.sleep(2)
+
+pyautogui.press("enter")
+

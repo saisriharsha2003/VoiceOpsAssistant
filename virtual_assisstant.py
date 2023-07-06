@@ -23,8 +23,6 @@ def output(audio):
     assistant.runAndWait()
 
 
-
-
 def inputCommand():
     rec = sr.Recognizer()
     query = ""
@@ -85,6 +83,7 @@ def play_video_in_youtube():
 def screenshot():
     im = pyautogui.screenshot()
     im.save("screenshot.jpg")
+
 
 # capturing photo
 def capture_photo():
