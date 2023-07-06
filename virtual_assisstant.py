@@ -60,11 +60,11 @@ def inputCommand1():
     return query1
 
 
-#todo: alarm
-#todo: youtube controls
-#todo: interrnet speed
-#todo: play audio music
-#todo :date
+# todo: alarm
+# todo: youtube controls
+# todo: interrnet speed
+# todo: play audio music
+# todo :date
 
 # chrome searching
 def chrome_search():
@@ -186,7 +186,9 @@ if __name__ == '__main__':
                 capture_photo()
         elif 'screenshot' in query:
             screenshot()
-
+        elif "date" in query:
+            c_date = str(datetime.date.today())
+            output("Todays Date is " + c_date)
         elif 'search' in query and 'file' in query:
             find_file_path()
         elif "stop" in query or "exit" in query or "bye" in query:
