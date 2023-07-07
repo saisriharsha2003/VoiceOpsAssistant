@@ -6,6 +6,7 @@ import pyttsx3
 import pywhatkit
 import speech_recognition as sr
 import vobject
+from PyDictionary import PyDictionary
 from googlesearch import search
 import os
 from translate import Translator
@@ -85,6 +86,15 @@ def chrome_search():
     first_result = next(search_results, None)
     if first_result:
         wb.open(first_result)
+
+
+def meaning_of_word(word):
+    meaning_of_word = PyDictionary().meaning(word)
+    pos_tag = list(meaning_of_word.keys())
+    meanings = list(meaning_of_word.values())
+    for i in range(len(meaning_of_word)):
+        print("when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
+        output("when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
 
 
 # playing YouTube video
@@ -187,6 +197,10 @@ if __name__ == '__main__':
         elif 'youtube' in query:
             if 'play' in query:
                 play_video_in_youtube()
+        elif 'meaning' in query and 'word' in query:
+            output("Which word do I need to explain the meaning of? Sir!")
+            word = inputCommand()
+            meaning_of_word(word)
         elif 'translate' in query:
             perform_translation()
         elif 'camera' in query:
@@ -202,6 +216,10 @@ if __name__ == '__main__':
         elif "stop" in query or "exit" in query or "bye" in query:
             output("Ok Bye Sir")
             break
+        elif 'meaning' in query:
+            word = query.split()
+            meaning_of_word(word[-1])
+
         elif 'time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             output(f"Now the time is {strTime}")
