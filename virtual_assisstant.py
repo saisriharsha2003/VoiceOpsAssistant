@@ -1,9 +1,11 @@
 import datetime
 import webbrowser as wb
 import cv2
+from config import owmapikey
 import pyautogui
 import pyttsx3
 import pywhatkit
+import requests
 import speech_recognition as sr
 import vobject
 from PyDictionary import PyDictionary
@@ -69,7 +71,6 @@ def inputCommand1():
 # todo : location
 # todo: chrome-new tab,switch tab,switch window, close tab,cloase window
 # todo : temperature
-# todo: meaning of the word
 # todo : daily news
 # todo : wakeup function
 # todo: passward authentication
@@ -88,6 +89,29 @@ def chrome_search():
         wb.open(first_result)
 
 
+def get_temperature_of_city(city):
+    api_key = owmapikey
+    base_url = "http://api.openweathermap.org/data/2.5/weather"
+    params = {
+        "q": city,
+        "appid": api_key,
+        "units": "metric"
+    }
+    response = requests.get(base_url, params=params)
+    weather_data = response.json()
+
+    if "main" in weather_data and "temp" in weather_data["main"]:
+        temperature = weather_data["main"]["temp"]
+        return temperature
+    else:
+        print("Error retrieving temperature data.")
+        print("Response:", weather_data)
+        return None
+
+    output(f"The temperature in {city} is {temperature}°C.")
+
+
+# meaning og the word
 def meaning_of_word(word):
     meaning_of_word = PyDictionary().meaning(word)
     pos_tag = list(meaning_of_word.keys())
@@ -104,6 +128,7 @@ def play_video_in_youtube():
     pywhatkit.playonyt(video)
 
 
+# taking screenshot
 def screenshot():
     im = pyautogui.screenshot()
     im.save("screenshot.jpg")
@@ -140,6 +165,7 @@ def send_whatsapp_message():
     pywhatkit.sendwhatmsg_instantly(phone_number, message)
 
 
+# finding file path
 def find_file_path():
     output("What is th file name?")
     file = inputCommand()
@@ -154,6 +180,7 @@ def find_file_path():
     return None
 
 
+# translating word or sentence
 def perform_translation():
     output("what is the source language")
     source = inputCommand()
@@ -219,7 +246,9 @@ if __name__ == '__main__':
         elif 'meaning' in query:
             word = query.split()
             meaning_of_word(word[-1])
-
+        elif 'temperature' in query:
+            city = query.split()[-1]
+            get_temperature_of_city(city)
         elif 'time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             output(f"Now the time is {strTime}")
