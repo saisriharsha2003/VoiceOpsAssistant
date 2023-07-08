@@ -75,7 +75,30 @@ def inputCommand1():
 # todo : wakeup function
 # todo: passward authentication
 
-
+def wish_and_time():
+    time = datetime.datetime.now().strftime("%H:%M:%S")
+    g_t=time.split(':')
+    hrs=int(g_t[0])
+    mins=g_t[1]
+    secs=g_t[2]
+    if hrs>=5 and  hrs<=12:
+        print("Good Morning Sir!")
+        output("Good Morning Sir!")
+    elif hrs>=12 and hrs<=17:
+        print("Good Afternoon Sir!")
+        output("Good Afternoon Sir!")
+    elif hrs>=17 and hrs<=21:
+        print("Good Evening Sir!")
+        output("Good Evening Sir!")
+    else:
+        print("Good Night Sir!")
+        output("Good Night Sir!")
+    
+    current_time = datetime.datetime.now().strftime("%I:%M %p")
+    print("It's " + current_time + " Sir!")
+    output("It's "+current_time+" Sir!")
+        
+        
 # chrome searching
 def chrome_search():
     output("what should i search for you sir?")
@@ -206,7 +229,7 @@ def send_mail():
 
 
 if __name__ == '__main__':
-    output("Hello Sir! I am your personal desktop assistant")
+    wish_and_time()
     while 1:
         r = sr.Recognizer()
         query = inputCommand1().lower()
