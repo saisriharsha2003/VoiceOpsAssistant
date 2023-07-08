@@ -112,7 +112,10 @@ def chrome_search():
         wb.open(first_result)
 
 
-def get_temperature_of_city(city):
+def get_temperature_of_city():
+    output("For which location you need its temperature Sir?")
+    city = inputCommand()
+    output("Sure Sir! Wait a While,let me check the temperature of current location.....")
     api_key = owmapikey
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
@@ -122,16 +125,13 @@ def get_temperature_of_city(city):
     }
     response = requests.get(base_url, params=params)
     weather_data = response.json()
-
     if "main" in weather_data and "temp" in weather_data["main"]:
         temperature = weather_data["main"]["temp"]
-        return temperature
+        print(f"The temperature in {city} is {temperature}°C.")
+        output(f"The temperature in {city} is {temperature}°C.")
     else:
-        print("Error retrieving temperature data.")
-        print("Response:", weather_data)
-        return None
-
-    output(f"The temperature in {city} is {temperature}°C.")
+        output("Error retrieving temperature data.")
+        output("Response:", weather_data)
 
 
 # meaning og the word
@@ -270,8 +270,7 @@ if __name__ == '__main__':
             word = query.split()
             meaning_of_word(word[-1])
         elif 'temperature' in query:
-            city = query.split()[-1]
-            get_temperature_of_city(city)
+            get_temperature_of_city()
         elif 'time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             output(f"Now the time is {strTime}")
