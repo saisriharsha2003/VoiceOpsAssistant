@@ -77,35 +77,33 @@ def inputCommand1():
 
 def wish_and_time():
     time = datetime.datetime.now().strftime("%H:%M:%S")
-    g_t=time.split(':')
-    hrs=int(g_t[0])
-    mins=g_t[1]
-    secs=g_t[2]
-    if hrs>=5 and  hrs<=12:
-        print("Good Morning Sir!")
+    g_t = time.split(':')
+    hrs = int(g_t[0])
+    if 5 <= hrs <= 12:
         output("Good Morning Sir!")
-    elif hrs>=12 and hrs<=17:
-        print("Good Afternoon Sir!")
+        print("Good Morning Sir!")
+    elif 12 <= hrs <= 17:
         output("Good Afternoon Sir!")
-    elif hrs>=17 and hrs<=21:
-        print("Good Evening Sir!")
+        print("Good Afternoon Sir!")
+    elif 17 <= hrs <= 21:
         output("Good Evening Sir!")
+        print("Good Evening Sir!")
     else:
         print("Good Night Sir!")
         output("Good Night Sir!")
-    
+
     current_time = datetime.datetime.now().strftime("%I:%M %p")
+    output("It's " + current_time + " Sir!")
     print("It's " + current_time + " Sir!")
-    output("It's "+current_time+" Sir!")
-        
-        
+
+
 # chrome searching
 def chrome_search():
     output("what should i search for you sir?")
     chrome_query = inputCommand()
     res = "searching" + chrome_query + " for you sir...."
-    print(res)
     output(res)
+    print(res)
     search_results = search(query, num_results=1)
     first_result = next(search_results, None)
     if first_result:
@@ -114,8 +112,10 @@ def chrome_search():
 
 def get_temperature_of_city():
     output("For which location you need its temperature Sir?")
+    print("For which location you need its temperature Sir?")
     city = inputCommand()
     output("Sure Sir! Wait a While,let me check the temperature of current location.....")
+    print("Sure Sir! Wait a While,let me check the temperature of current location.....")
     api_key = owmapikey
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
@@ -127,11 +127,13 @@ def get_temperature_of_city():
     weather_data = response.json()
     if "main" in weather_data and "temp" in weather_data["main"]:
         temperature = weather_data["main"]["temp"]
-        print(f"The temperature in {city} is {temperature}°C.")
         output(f"The temperature in {city} is {temperature}°C.")
+        print(f"The temperature in {city} is {temperature}°C.")
     else:
         output("Error retrieving temperature data.")
         output("Response:", weather_data)
+        print("Error retrieving temperature data.")
+        print("Response:", weather_data)
 
 
 # meaning og the word
@@ -140,30 +142,37 @@ def meaning_of_word(word):
     pos_tag = list(meaning_of_word.keys())
     meanings = list(meaning_of_word.values())
     for i in range(len(meaning_of_word)):
-        print("when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
         output("when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
+        print("when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
 
 
 # playing YouTube video
 def play_video_in_youtube():
     output("which video or movie should i play for you sir?")
     video = inputCommand()
+    output("Playing "+video+" in youtube Sir!")
+    print("Playing "+video+" in youtube Sir!")
     pywhatkit.playonyt(video)
 
 
 # taking screenshot
 def screenshot():
+    output("Hold the Screen for few seconds Sir.let me take the screenshot")
+    print("Hold the Screen for few seconds Sir.let me take the screenshot")
     im = pyautogui.screenshot()
     im.save("screenshot.jpg")
+    output("Scrrenshot succesfully saved in current folder")
+    print("Scrrenshot succesfully saved in current folder")
 
 
 # capturing photo
 def capture_photo():
+    output("Sure Sir! wait a while")
     pyautogui.press("super")
     pyautogui.typewrite("camera")
     pyautogui.press("enter")
     pyautogui.sleep(2)
-    output("SMILE")
+    output("Smile Please")
     pyautogui.press("enter")
 
 
@@ -184,16 +193,23 @@ def send_whatsapp_message():
     if len(phone_number) < 13:
         phone_number = "+91" + phone_number
     output("What message should i send to {}".format(name))
+    print("What message should i send to {}".format(name))
     message = inputCommand()
     pywhatkit.sendwhatmsg_instantly(phone_number, message)
+    output("Message has been sent to "+name+" Sir!")
+    print("Message has been sent to " + name + " Sir!")
 
 
 # finding file path
 def find_file_path():
     output("What is th file name?")
+    print("What is th file name?")
     file = inputCommand()
     output("What is the extension of the file")
+    print("What is the extension of the file")
     extension = inputCommand()
+    output("Sure Sir! wait a while,let me fetch entire C disk for reuired file....")
+    print("Sure Sir! wait a while,let me fetch entire C disk for reuired file....")
     file_name = file + '.' + extension
     for root, dirs, files in os.walk('/'):
         if file_name in files:
@@ -206,11 +222,16 @@ def find_file_path():
 # translating word or sentence
 def perform_translation():
     output("what is the source language")
+    print("what is the source language")
     source = inputCommand()
     output("what is the target language")
+    print("what is the target language")
     target = inputCommand()
     output("what should i translate for you")
+    print("what should i translate for you")
     text = inputCommand()
+    output("Sure Sir! wait a while,let me translate the given text from "+source+" languge to "+target+" language")
+    print("Sure Sir! wait a while,let me translate the given text from " + source + " languge to " + target + " language")
     translator = Translator(from_lang=source, to_lang=target)
     translation = translator.translate(text)
     print(translation)
@@ -223,8 +244,11 @@ def send_mail():
     target_email = inputCommand()
     print(target_email)
     output("Which msg should i send to" + target_email)
+    print(target_email)
     msg = inputCommand()
     print(msg)
+    output("Sure Sir! wait a while ,let me send the mail to "+target_email)
+    print("Sure Sir! wait a while ,let me send the mail to " + target_email)
     pywhatkit.send_mail("rankelassh@gmail.com", "nwpmbjhunqhtjgdb", "Testing", msg, target_email)
 
 
