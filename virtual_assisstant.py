@@ -65,15 +65,15 @@ def inputCommand1():
 
 # todo: alarm
 # todo: youtube controls
-# todo: interrnet speed
+# todo: Internet speed
 # todo: play audio music
 # todo :date
 # todo : location
-# todo: chrome-new tab,switch tab,switch window, close tab,cloase window
+# todo: chrome-new tab,switch tab,switch window, close tab,close window
 # todo : temperature
 # todo : daily news
 # todo : wakeup function
-# todo: passward authentication
+# todo: password authentication
 
 def wish_and_time():
     time = datetime.datetime.now().strftime("%H:%M:%S")
@@ -161,8 +161,8 @@ def screenshot():
     print("Hold the Screen for few seconds Sir.let me take the screenshot")
     im = pyautogui.screenshot()
     im.save("screenshot.jpg")
-    output("Scrrenshot succesfully saved in current folder")
-    print("Scrrenshot succesfully saved in current folder")
+    output("Screenshot successfully saved in current folder")
+    print("Screenshot successfully saved in current folder")
 
 
 # capturing photo
@@ -208,8 +208,8 @@ def find_file_path():
     output("What is the extension of the file")
     print("What is the extension of the file")
     extension = inputCommand()
-    output("Sure Sir! wait a while,let me fetch entire C disk for reuired file....")
-    print("Sure Sir! wait a while,let me fetch entire C disk for reuired file....")
+    output("Sure Sir! wait a while,let me fetch entire C disk for required file....")
+    print("Sure Sir! wait a while,let me fetch entire C disk for required file....")
     file_name = file + '.' + extension
     for root, dirs, files in os.walk('/'):
         if file_name in files:
@@ -230,8 +230,8 @@ def perform_translation():
     output("what should i translate for you")
     print("what should i translate for you")
     text = inputCommand()
-    output("Sure Sir! wait a while,let me translate the given text from "+source+" languge to "+target+" language")
-    print("Sure Sir! wait a while,let me translate the given text from " + source + " languge to " + target + " language")
+    output("Sure Sir! wait a while,let me translate the given text from "+source+" language to "+target+" language")
+    print("Sure Sir! wait a while,let me translate the given text from " + source + " language to " + target + " language")
     translator = Translator(from_lang=source, to_lang=target)
     translation = translator.translate(text)
     print(translation)
