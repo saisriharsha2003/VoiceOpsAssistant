@@ -55,7 +55,7 @@ def play_song(file_path):
 
 # Example usage
 song_name = input("Enter the song name: ")
-save_directory = "C:\\Users\\ranke\\Harsha\Projects\\virtual_assisstant\\songs"
+save_directory = "C:\\Users\\ranke\\Harsha\Projects\\virtual_assistant\\songs"
 # Download the song
 song_file = download_song(song_name, save_directory)
 
