@@ -63,17 +63,17 @@ def inputCommand1():
     return query1
 
 
-# todo: alarm
-# todo: youtube controls
-# todo: Internet speed
-# todo: play audio music
-# todo :date
-# todo : location
-# todo: chrome-new tab,switch tab,switch window, close tab,close window
-# todo : temperature
-# todo : daily news
-# todo : wakeup function
-# todo: password authentication
+# TODO: alarm
+# TODO: youtube controls
+# TODO: Internet speed
+# TODO: play audio music
+# TODO:date
+# TODO: location
+# TODO: chrome-new tab,switch tab,switch window, close tab,close window
+# TODO: temperature
+# TODO: daily news
+# TODO: wakeup function
+# TODO: password authentication
 
 def wish_and_time():
     time = datetime.datetime.now().strftime("%H:%M:%S")
