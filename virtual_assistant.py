@@ -13,7 +13,7 @@ from googlesearch import search
 import os
 from translate import Translator
 
-user = "harsha"
+user = "Harsha"
 desktop_assistant = 'Jarvis'
 assistant = pyttsx3.init()
 assistant.setProperty('rate', 150)
@@ -288,7 +288,7 @@ if __name__ == '__main__':
     while 1:
         r = sr.Recognizer()
         query = inputCommand1().lower()
-        print(query)
+        print(user+":"+query)
         if query == 0:
             continue
         elif 'chrome' in query or 'google' in query:
