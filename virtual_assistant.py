@@ -37,7 +37,7 @@ def inputCommand():
             try:
                 query = rec.recognize_google(audio, language="en-IN")
                 count += 1
-            except Exception as e:
+            except Exception:
                 print(desktop_assistant + ":Sorry,I can't hear you!")
                 output("Sorry,I can't hear you!")
     return query
@@ -56,7 +56,7 @@ def inputCommand1():
             try:
                 query1 = rec.recognize_google(audio, language="en-IN")
                 count += 1
-            except Exception as e:
+            except Exception:
                 print(desktop_assistant + ":Sorry,I can't hear you!")
                 output("Sorry,I can't hear you!")
     return query1
@@ -146,15 +146,11 @@ def get_temperature_of_city():
         print(desktop_assistant + ":Error retrieving temperature data.")
         print(desktop_assistant + ":Response:", weather_data)
         output("Error retrieving temperature data.")
-        output("Response:", weather_data)
+        output("Response:" + weather_data)
 
 
 # meaning og the word
-def meaning_of_word():
-    print(desktop_assistant+":Which word do I need to explain its meaning for?!")
-    output("Which word do I need to explain its meaning for?!")
-    word = inputCommand()
-    print(user + ":" + word)
+def meaning_of_the_word(word):
     meaning_of_word = PyDictionary().meaning(word)
     pos_tag = list(meaning_of_word.keys())
     meanings = list(meaning_of_word.values())
@@ -260,11 +256,13 @@ def perform_translation():
     print("what should i translate for you")
     text = inputCommand()
     print(user + ":" + text)
-    print(desktop_assistant + ":Sure! wait a while,let me translate the given text from " + source + " language to " + target + " language")
+    print(
+        desktop_assistant + ":Sure! wait a while,let me translate the given text from " + source + " language to "+target+" language")
     output("Sure! wait a while,let me translate the given text from " + source + " language to " + target + " language")
     translator = Translator(from_lang=source, to_lang=target)
     translation = translator.translate(text)
-    print(desktop_assistant + ":The text that is translated from " + source + " language to " + target + " language is " + translation)
+    print(
+        desktop_assistant + ":The text that is translated from " + source + " language to " + target + " language is " + translation)
     output("The text that is translated from " + source + " language to " + target + " language is " + translation)
 
 
@@ -277,7 +275,7 @@ def send_mail():
     print(desktop_assistant + ":Sir, What message should I send to " + target_email)
     output("Sir, What message should I send to " + target_email)
     msg = inputCommand()
-    print(user+":"+msg)
+    print(user + ":" + msg)
     print(desktop_assistant + ":Sure Sir! wait a while ,let me send the mail to " + target_email)
     output("Sure Sir! wait a while ,let me send the mail to " + target_email)
     pywhatkit.send_mail("rankelassh@gmail.com", "nwpmbjhunqhtjgdb", "Testing", msg, target_email)
@@ -304,8 +302,11 @@ if __name__ == '__main__':
         elif 'youtube' in query:
             if 'play' in query:
                 play_video_in_youtube()
-        elif 'meaning' in query and 'word' in query:
-            meaning_of_word()
+        elif 'meaning' in query:
+            print(desktop_assistant + ":Which word do I need to explain its meaning for?!")
+            output("Which word do I need to explain its meaning for?!")
+            word = query.split()
+            meaning_of_the_word(word[-1])
         elif 'translate' in query:
             perform_translation()
         elif 'network' in query and 'speed' in query:
@@ -323,9 +324,6 @@ if __name__ == '__main__':
         elif "stop" in query or "exit" in query or "bye" in query:
             output("Ok Bye Sir")
             break
-        elif 'meaning' in query:
-            word = query.split()
-            meaning_of_word(word[-1])
         elif 'temperature' in query:
             get_temperature_of_city()
         elif 'time' in query:
