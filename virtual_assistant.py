@@ -1,6 +1,5 @@
 import datetime
 import webbrowser as wb
-import cv2
 import speedtest
 from config import owmapikey
 import pyautogui
@@ -15,7 +14,7 @@ import os
 from translate import Translator
 
 user = "harsha"
-assistant = 'Jarvis'
+desktop_assistant = 'Jarvis'
 assistant = pyttsx3.init()
 assistant.setProperty('rate', 150)
 voices = assistant.getProperty("voices")
@@ -29,7 +28,6 @@ def output(audio):
 
 def inputCommand():
     rec = sr.Recognizer()
-    query = ""
     count = 0
     while count < 1:
         with sr.Microphone() as source:
@@ -40,18 +38,18 @@ def inputCommand():
                 query = rec.recognize_google(audio, language="en-IN")
                 count += 1
             except Exception as e:
+                print(desktop_assistant + ":Sorry,I can't hear you!")
                 output("Sorry,I can't hear you!")
-
     return query
 
 
 def inputCommand1():
     rec = sr.Recognizer()
-    query1 = ""
     count = 0
     while count < 1:
         with sr.Microphone() as source:
             rec.pause_threshold = 1
+            print(desktop_assistant + ":How can i help you Sir?")
             output("How can i help you Sir?")
             rec.adjust_for_ambient_noise(source)
             audio = rec.listen(source)
@@ -59,8 +57,8 @@ def inputCommand1():
                 query1 = rec.recognize_google(audio, language="en-IN")
                 count += 1
             except Exception as e:
+                print(desktop_assistant + ":Sorry,I can't hear you!")
                 output("Sorry,I can't hear you!")
-
     return query1
 
 
@@ -77,35 +75,37 @@ def inputCommand1():
 # TODO: wakeup function
 # TODO: password authentication
 
+
 def wish_and_time():
     time = datetime.datetime.now().strftime("%H:%M:%S")
     g_t = time.split(':')
     hrs = int(g_t[0])
     if 5 <= hrs <= 12:
+        print(desktop_assistant + ":Good Morning Sir!")
         output("Good Morning Sir!")
-        print("Good Morning Sir!")
     elif 12 <= hrs <= 17:
+        print(desktop_assistant + ":Good Afternoon Sir!")
         output("Good Afternoon Sir!")
-        print("Good Afternoon Sir!")
     elif 17 <= hrs <= 21:
+        print(desktop_assistant + ":Good Evening Sir!")
         output("Good Evening Sir!")
-        print("Good Evening Sir!")
     else:
-        print("Good Night Sir!")
+        print(desktop_assistant + ":Good Night Sir!")
         output("Good Night Sir!")
-
     current_time = datetime.datetime.now().strftime("%I:%M %p")
+    print(desktop_assistant + ":It's " + current_time + " Sir!")
     output("It's " + current_time + " Sir!")
-    print("It's " + current_time + " Sir!")
 
 
 # chrome searching
 def chrome_search():
+    print(desktop_assistant + ":what should i search for you sir?")
     output("what should i search for you sir?")
     chrome_query = inputCommand()
+    print(user + ":" + chrome_query)
     res = "searching" + chrome_query + " for you sir...."
+    print(desktop_assistant + ":" + res)
     output(res)
-    print(res)
     search_results = search(query, num_results=1)
     first_result = next(search_results, None)
     if first_result:
@@ -114,20 +114,21 @@ def chrome_search():
 
 def check_network_speed():
     st = speedtest.Speedtest()
-    download_speed = st.download() / 10**6 
-    upload_speed = st.upload() / 10**6  
-    print(f"Download Speed is: {download_speed:.2f} Mbps")
-    print(f"Upload Speed is: {upload_speed:.2f} Mbps")
+    download_speed = st.download() / 10 ** 6
+    upload_speed = st.upload() / 10 ** 6
+    print(desktop_assistant + f":Download Speed is: {download_speed:.2f} Mbps")
+    print(desktop_assistant + f":Upload Speed is: {upload_speed:.2f} Mbps")
     output(f"Download Speed is: {download_speed:.2f} Mbps")
     output(f"Upload Speed is: {upload_speed:.2f} Mbps")
 
 
 def get_temperature_of_city():
+    print(desktop_assistant + ":For which location you need its temperature Sir?")
     output("For which location you need its temperature Sir?")
-    print("For which location you need its temperature Sir?")
     city = inputCommand()
-    output("Sure Sir! Wait a While,let me check the temperature of current location.....")
-    print("Sure Sir! Wait a While,let me check the temperature of current location.....")
+    print(user + ":" + city)
+    print(desktop_assistant + ":Sure Sir! Wait a While,let me check the temperature of given location.....")
+    output("Sure Sir! Wait a While,let me check the temperature of given location.....")
     api_key = owmapikey
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
@@ -139,59 +140,69 @@ def get_temperature_of_city():
     weather_data = response.json()
     if "main" in weather_data and "temp" in weather_data["main"]:
         temperature = weather_data["main"]["temp"]
+        print(desktop_assistant + f":The temperature in {city} is {temperature}°C.")
         output(f"The temperature in {city} is {temperature}°C.")
-        print(f"The temperature in {city} is {temperature}°C.")
     else:
+        print(desktop_assistant + ":Error retrieving temperature data.")
+        print(desktop_assistant + ":Response:", weather_data)
         output("Error retrieving temperature data.")
         output("Response:", weather_data)
-        print("Error retrieving temperature data.")
-        print("Response:", weather_data)
 
 
 # meaning og the word
-def meaning_of_word(word):
+def meaning_of_word():
+    print(desktop_assistant+":Which word do I need to explain its meaning for?!")
+    output("Which word do I need to explain its meaning for?!")
+    word = inputCommand()
+    print(user + ":" + word)
     meaning_of_word = PyDictionary().meaning(word)
     pos_tag = list(meaning_of_word.keys())
     meanings = list(meaning_of_word.values())
     for i in range(len(meaning_of_word)):
+        print(desktop_assistant + ":when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
         output("when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
-        print("when the " + word + " is a " + pos_tag[i] + ",its meaning is " + str(meanings[i]))
 
 
 # playing YouTube video
 def play_video_in_youtube():
-    output("which video or movie should i play for you sir?")
-    video = inputCommand()
-    output("Playing "+video+" in youtube Sir!")
-    print("Playing "+video+" in youtube Sir!")
-    pywhatkit.playonyt(video)
+    print(desktop_assistant + ":which video or movie should i play for you sir?")
+    output("which video or movie should i play for you?")
+    video_name = inputCommand()
+    print(user + ":" + video_name)
+    print(desktop_assistant + ":Playing " + video_name + " in youtube!")
+    output("Playing " + video_name + " in youtube!")
+    pywhatkit.playonyt(video_name)
 
 
 # taking screenshot
 def screenshot():
+    print(desktop_assistant + ":Hold the Screen for few seconds.let me take the screenshot")
     output("Hold the Screen for few seconds Sir.let me take the screenshot")
-    print("Hold the Screen for few seconds Sir.let me take the screenshot")
     im = pyautogui.screenshot()
     im.save("screenshot.jpg")
+    print(desktop_assistant + ":Screenshot successfully saved in current folder")
     output("Screenshot successfully saved in current folder")
-    print("Screenshot successfully saved in current folder")
 
 
 # capturing photo
 def capture_photo():
+    print(desktop_assistant + ":Sure! wait a while")
     output("Sure Sir! wait a while")
     pyautogui.press("super")
     pyautogui.typewrite("camera")
     pyautogui.press("enter")
     pyautogui.sleep(2)
+    print(desktop_assistant + ":Smile Please")
     output("Smile Please")
     pyautogui.press("enter")
 
 
 # sending whatsapp message
 def send_whatsapp_message():
-    output("For whom should i send the message sir?")
+    print(desktop_assistant + ":For whom should i send the message?")
+    output("For whom should i send the message?")
     name = inputCommand()
+    print(user + ":" + name)
     with open('all contacts .vcf') as f:
         vcards = vobject.readComponents(f.read())
     l = []
@@ -204,64 +215,74 @@ def send_whatsapp_message():
     phone_number = l[0]
     if len(phone_number) < 13:
         phone_number = "+91" + phone_number
+    print(desktop_assistant + ":What message should i send to {}".format(name))
     output("What message should i send to {}".format(name))
-    print("What message should i send to {}".format(name))
     message = inputCommand()
+    print(user + ":" + message)
     pywhatkit.sendwhatmsg_instantly(phone_number, message)
-    output("Message has been sent to "+name+" Sir!")
-    print("Message has been sent to " + name + " Sir!")
+    print(desktop_assistant + ":Message has been sent to " + name)
+    output("Message has been sent to " + name)
 
 
 # finding file path
 def find_file_path():
+    print(desktop_assistant + ":What is th file name?")
     output("What is th file name?")
-    print("What is th file name?")
     file = inputCommand()
+    print(user + ":" + file)
+    print(desktop_assistant + ":What is the extension of the file")
     output("What is the extension of the file")
-    print("What is the extension of the file")
     extension = inputCommand()
-    output("Sure Sir! wait a while,let me fetch entire C disk for required file....")
-    print("Sure Sir! wait a while,let me fetch entire C disk for required file....")
+    print(user + ":" + extension)
+    print(desktop_assistant + ":Sure! wait a while,let me fetch entire C disk for required file....")
+    output("Sure! wait a while,let me fetch entire C disk for required file....")
     file_name = file + '.' + extension
     for root, dirs, files in os.walk('/'):
         if file_name in files:
-            file_extension = os.path.splitext(file_name)[1]
-            print(file_extension)
-            return os.path.abspath(os.path.join(root, file_name))
-    return None
+            print(desktop_assistant + ":The " + file + " saved in the" + os.path.abspath(os.path.join(root, file_name)))
+            output("The " + file + " saved in the" + os.path.abspath(os.path.join(root, file_name)))
+        else:
+            print(desktop_assistant + ":The requested file is not currently on the system.")
+            output("The requested file is not currently on the system.")
 
 
 # translating word or sentence
 def perform_translation():
-    output("what is the source language")
-    print("what is the source language")
+    print(desktop_assistant + ":What is the original language to be translated?")
+    output("What is the original language to be translated?")
     source = inputCommand()
-    output("what is the target language")
-    print("what is the target language")
+    print(user + ":" + source)
+    print(desktop_assistant + ":What is the target language for translation?")
+    output("What is the target language for translation?")
     target = inputCommand()
+    print(user + ":" + target)
     output("what should i translate for you")
     print("what should i translate for you")
     text = inputCommand()
-    output("Sure Sir! wait a while,let me translate the given text from "+source+" language to "+target+" language")
-    print("Sure Sir! wait a while,let me translate the given text from " + source + " language to " + target + " language")
+    print(user + ":" + text)
+    print(desktop_assistant + ":Sure! wait a while,let me translate the given text from " + source + " language to " + target + " language")
+    output("Sure! wait a while,let me translate the given text from " + source + " language to " + target + " language")
     translator = Translator(from_lang=source, to_lang=target)
     translation = translator.translate(text)
-    print(translation)
-    output(translation)
+    print(desktop_assistant + ":The text that is translated from " + source + " language to " + target + " language is " + translation)
+    output("The text that is translated from " + source + " language to " + target + " language is " + translation)
 
 
 # sending_email
 def send_mail():
-    output("To whom should i send an email Sir?")
+    print(desktop_assistant + ":Sir, To whom should I write an email?")
+    output("Sir, To whom should I write an email?")
     target_email = inputCommand()
-    print(target_email)
-    output("Which msg should i send to" + target_email)
-    print(target_email)
+    print(user + ":" + target_email)
+    print(desktop_assistant + ":Sir, What message should I send to " + target_email)
+    output("Sir, What message should I send to " + target_email)
     msg = inputCommand()
-    print(msg)
-    output("Sure Sir! wait a while ,let me send the mail to "+target_email)
-    print("Sure Sir! wait a while ,let me send the mail to " + target_email)
+    print(user+":"+msg)
+    print(desktop_assistant + ":Sure Sir! wait a while ,let me send the mail to " + target_email)
+    output("Sure Sir! wait a while ,let me send the mail to " + target_email)
     pywhatkit.send_mail("rankelassh@gmail.com", "nwpmbjhunqhtjgdb", "Testing", msg, target_email)
+    print(desktop_assistant + ":Sir, The email was successfully delivered to the intended recipient.")
+    output("Sir, The email was successfully delivered to the intended recipient.")
 
 
 if __name__ == '__main__':
@@ -284,9 +305,7 @@ if __name__ == '__main__':
             if 'play' in query:
                 play_video_in_youtube()
         elif 'meaning' in query and 'word' in query:
-            output("Which word do I need to explain the meaning of? Sir!")
-            word = inputCommand()
-            meaning_of_word(word)
+            meaning_of_word()
         elif 'translate' in query:
             perform_translation()
         elif 'network' in query and 'speed' in query:
@@ -298,7 +317,7 @@ if __name__ == '__main__':
             screenshot()
         elif "date" in query:
             c_date = str(datetime.date.today())
-            output("Todays Date is " + c_date)
+            output("Today's Date is " + c_date)
         elif 'search' in query and 'file' in query:
             find_file_path()
         elif "stop" in query or "exit" in query or "bye" in query:
