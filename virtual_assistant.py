@@ -64,11 +64,14 @@ def inputCommand1():
 
 
 # TODO: alarm
-# TODO: youtube controls
+# TODO: remember
+# TODO: GUI
+# TODO: make a call
+# TODO: youtube controls.3
 # TODO: Internet speed
 # TODO: play audio music
-# TODO:date
 # TODO: location
+# TODO: date
 # TODO: chrome-new tab,switch tab,switch window, close tab,close window
 # TODO: temperature
 # TODO: daily news
