@@ -1,6 +1,7 @@
 import datetime
 import webbrowser as wb
 import cv2
+import speedtest
 from config import owmapikey
 import pyautogui
 import pyttsx3
@@ -68,10 +69,8 @@ def inputCommand1():
 # TODO: GUI
 # TODO: make a call
 # TODO: youtube controls.3
-# TODO: Internet speed
 # TODO: play audio music
 # TODO: location
-# TODO: date
 # TODO: chrome-new tab,switch tab,switch window, close tab,close window
 # TODO: temperature
 # TODO: daily news
@@ -111,6 +110,16 @@ def chrome_search():
     first_result = next(search_results, None)
     if first_result:
         wb.open(first_result)
+
+
+def check_network_speed():
+    st = speedtest.Speedtest()
+    download_speed = st.download() / 10**6 
+    upload_speed = st.upload() / 10**6  
+    print(f"Download Speed is: {download_speed:.2f} Mbps")
+    print(f"Upload Speed is: {upload_speed:.2f} Mbps")
+    output(f"Download Speed is: {download_speed:.2f} Mbps")
+    output(f"Upload Speed is: {upload_speed:.2f} Mbps")
 
 
 def get_temperature_of_city():
@@ -280,6 +289,8 @@ if __name__ == '__main__':
             meaning_of_word(word)
         elif 'translate' in query:
             perform_translation()
+        elif 'network' in query and 'speed' in query:
+            check_network_speed()
         elif 'camera' in query:
             if 'capture a photo' in query:
                 capture_photo()
