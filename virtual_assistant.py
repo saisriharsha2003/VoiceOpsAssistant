@@ -65,6 +65,9 @@ def inputCommand1():
 # TODO: alarm
 # TODO: remember
 # TODO: GUI
+# TODO: download youtube video and play that video
+# TODO: random possword generator
+# TODO: remember function
 # TODO: make a call
 # TODO: youtube controls.3
 # TODO: play audio music
