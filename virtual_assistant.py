@@ -162,7 +162,7 @@ def meaning_of_the_word(word):
 # playing YouTube video
 def play_video_in_youtube():
     print(desktop_assistant + ":which video or movie should i play for you sir?")
-    output("which video or movie should i play for you?")
+    output("which video or movie should i play for you sir?")
     video_name = inputCommand()
     print(user + ":" + video_name)
     print(desktop_assistant + ":Playing " + video_name + " in youtube!")
