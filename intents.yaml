@@ -1,0 +1,104 @@
+version: "2.0"
+
+intents:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey there
+    - good morning
+    - good afternoon
+    - good evening
+    - good night
+
+- intent: search_chrome
+  examples: |
+    - search on Chrome
+
+    - open Chrome and search
+    - can you search for me?
+
+- intent: send_whatsapp
+  examples: |
+    - send a message on WhatsApp
+    - can you send a WhatsApp message?
+    - send a text via WhatsApp
+
+- intent: send_email
+  examples: |
+    - send an email
+    - can you send an email for me?
+    - write an email
+
+- intent: play_youtube
+  examples: |
+    - play a video on YouTube
+    - open YouTube and play a video
+    - can you play a YouTube video?
+
+- intent: find_meaning
+  examples: |
+    - what's the meaning of a word?
+    - explain the meaning of a word
+    - tell me the definition of a word
+
+- intent: translate
+  examples: |
+    - translate a word
+    - can you translate something for me?
+    - help me with translation
+
+- intent: check_network_speed
+  examples: |
+    - check my network speed
+    - what's my internet speed?
+    - test my internet connection
+
+- intent: capture_photo
+  examples: |
+    - capture a photo
+    - take a picture
+    - click a photo
+
+- intent: take_screenshot
+  examples: |
+    - take a screenshot
+    - capture the screen
+    - screenshot my desktop
+
+- intent: get_date
+  examples: |
+    - what is the date today?
+    - tell me today's date
+    - date
+
+- intent: search_file
+  examples: |
+    - search for a file
+    - find a specific file
+    - locate a file on my system
+
+- intent: get_temperature
+  examples: |
+    - get the temperature
+    - what's the weather like?
+    - temperature of a city
+
+- intent: get_time
+  examples: |
+    - what's the time now?
+    - tell me the current time
+    - time
+
+- intent: stop_assistant
+  examples: |
+    - stop 
+    - Exit 
+    - Quit
+
+- intent: unknown
+  examples: |
+    - I don't know
+    - Not sure
+    - Can you repeat that?
+    - I didn't understand
