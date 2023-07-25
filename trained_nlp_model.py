@@ -1,34 +1,39 @@
-import torch
-from transformers import BertTokenizer, BertForSequenceClassification
+from fuzzywuzzy import fuzz
 import yaml
 
-# Load the pre-trained BERT model and tokenizer
-model_name = "bert-base-uncased"
-tokenizer = BertTokenizer.from_pretrained(model_name)
+# Load the YAML file containing intents
+with open("C:\\Users\\ranke\\Harsha\\Projects\\Desktop Assistant\\intents.yaml", "r") as yaml_file:
+    intents_data = yaml.safe_load(yaml_file)
 
-# Load intents from the YAML file
-def load_intents_from_yaml(yaml_file):
-    with open(yaml_file, 'r') as file:
-        data = yaml.safe_load(file)
-        intents = list(data['nlu'])
-    return intents
+# Process user input
+user_input = "Hey, what time is it?"
 
-# Replace 'training_data.yml' with the path to your YAML file
-yaml_file = "training_data.yml"
-intents = load_intents_from_yaml(yaml_file)
 
-# Load the pre-trained model and set the number of labels
-model = BertForSequenceClassification.from_pretrained(model_name, num_labels=len(intents))
+# Function to calculate similarity between user input and example phrases
+def calculate_similarity(input_text, examples):
+    return max(fuzz.ratio(input_text.lower(), example.lower()) for example in examples)
 
-# Define the user input
-user_input = "Hi, how are you?"
 
-# Tokenize the user input and prepare it for the model
-inputs = tokenizer(user_input, return_tensors="pt", padding=True, truncation=True)
-outputs = model(**inputs)
+# Find the best matching intent based on similarity
+best_intent = None
+max_similarity = 0
 
-# Get the predicted intent label
-intent_idx = torch.argmax(outputs.logits, dim=1).item()
-predicted_intent = intents[intent_idx]
+for intent_data in intents_data["intents"]:
+    intent_examples = intent_data["examples"].strip().split("\n")
+    similarity = calculate_similarity(user_input, intent_examples)
+    if similarity > max_similarity:
+        max_similarity = similarity
+        best_intent = intent_data["intent"]
 
-print("Predicted Intent:", predicted_intent)
+# Implement If-Else logic based on the extracted intent
+if best_intent == "greet":
+    print("Hello! How can I assist you?")
+elif best_intent == "search_chrome":
+    print("Opening Chrome and searching...")
+elif best_intent == "send_whatsapp":
+    print("Sending a message on WhatsApp...")
+# Add more elif blocks for other intents
+elif best_intent is not None:
+    print("Executing the action for intent:", best_intent)
+else:
+    print("I'm sorry, I didn't understand that.")
