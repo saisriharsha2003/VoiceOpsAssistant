@@ -10,15 +10,16 @@ intents:
     - good afternoon
     - good evening
     - good night
+    - Hey, what time is it?
 
 - intent: search_chrome
   examples: |
-    - search on Chrome
-
-    - open Chrome and search
+    - search on chrome
+    - search in chrome
+    - open chrome and search
     - can you search for me?
 
-- intent: send_whatsapp
+- intent: send_whatsapp_message
   examples: |
     - send a message on WhatsApp
     - can you send a WhatsApp message?
