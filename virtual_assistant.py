@@ -84,6 +84,7 @@ def inputCommand1():
 
 # TODO: searching chrome not working properly
 # TODO: alarm
+# TODO: add email address recognizer
 # TODO: remember
 # TODO: GUI
 # TODO: download youtube video and play that video
