@@ -108,7 +108,7 @@ def authenticate(max_attempts=3):
     while attempts < max_attempts:
         print(desktop_assistant + ": Whats the password?")
         speak("Whats the password?")
-        password = inputCommand().replace(" ","")
+        password = inputCommand().replace(" ", "")
         if password == authorized_password:
             print("Authentication successful. Starting the virtual assistant.")
             speak("Authentication successful. Starting the virtual assistant.")
@@ -198,7 +198,10 @@ def get_temperature_of_city():
 
 
 # meaning of the word
-def meaning_of_the_word(word):
+def meaning_of_the_word():
+    print(desktop_assistant + ":Which word do I need to explain its meaning for?!")
+    speak("Which word do I need to explain its meaning for?!")
+    word = inputCommand()
     meaning_of_word = PyDictionary().meaning(word)
     pos_tag = list(meaning_of_word.keys())
     meanings = list(meaning_of_word.values())
@@ -351,10 +354,7 @@ if __name__ == '__main__':
             elif intent == 'play_youtube':
                 play_video_in_youtube()
             elif intent == 'find_meaning':
-                print(desktop_assistant + ":Which word do I need to explain its meaning for?!")
-                speak("Which word do I need to explain its meaning for?!")
-                word = s_query.split()
-                meaning_of_the_word(word[-1])
+                meaning_of_the_word()
             elif intent == 'translate':
                 perform_translation()
             elif intent == 'check_network_speed':
@@ -378,6 +378,3 @@ if __name__ == '__main__':
                 break
             else:
                 speak("Could you please repeat again")
-
-
-
