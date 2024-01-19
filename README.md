@@ -1,16 +1,15 @@
 # Harsha's Desktop Virtual Assistant
 
 ## Description
-This repository contains the code for a desktop virtual assistant developed by Sai Sri Harsha. The assistant is designed to help with various tasks and improve productivity.
+The Desktop Assistant project is a versatile virtual assistant designed to streamline user interactions with various tasks. Leveraging cutting-edge technologies such as speech recognition and API integration, this assistant offers a range of functionalities, including web searching, message sending, YouTube video playback, and more.
 
-## Features
-- Feature 1
-- Feature 2
-- Feature 3
-- ...
+## Key Features
+Speech Recognition: The assistant comprehends user commands through voice input, providing a hands-free and intuitive interaction experience.
+API Integration: Utilizing various APIs, the assistant seamlessly integrates with external services, offering features like real-time weather information, YouTube video playback, and more.
+Password Authentication: Prioritizing security, the assistant ensures user authentication through a password mechanism, safeguarding sensitive functionalities.
+Multifunctional Tasks: From translation services to web searching, message sending, and beyond, the assistant caters to a diverse set of user needs.
 
-## Installation
-Provide detailed steps on how to clone and install your project. For example:
+## Getting Started
 
 ```bash
 # Clone this repository
@@ -20,4 +19,9 @@ git clone https://github.com/saisriharsha2003/harsha-desktop-virtual-assisstant.
 cd harsha-desktop-virtual-assisstant
 
 # Install dependencies
-npm install
+pip install -r requirements.txt
+
+# Run the Assistant
+python desktop_assistant.py
+
+
