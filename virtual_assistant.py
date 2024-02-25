@@ -3,7 +3,7 @@ import pyttsx3
 from fuzzywuzzy import fuzz
 import yaml
 import speech_recognition as sr
-from wish import wish_and_time
+from Wish import wish_and_time
 from Authentication import authenticate
 from Web_Browsing import chrome_search
 from Network_Speed import check_network_speed
