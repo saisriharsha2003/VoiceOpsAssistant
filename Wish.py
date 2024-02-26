@@ -1,6 +1,6 @@
 import datetime
-from virtual_assistant import speak
-from virtual_assistant import desktop_assistant
+from CommonFunctions import speak, desktop_assistant
+
 def wish_and_time():
     time = datetime.datetime.now().strftime("%H:%M:%S")
     g_t = time.split(':')

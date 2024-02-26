@@ -1,5 +1,5 @@
 import pyautogui
-from virtual_assistant import desktop_assistant, user, speak
+from CommonFunctions import desktop_assistant, user, speak
 
 def capture_photo():
     print(desktop_assistant + ": Sure! wait a while")

@@ -1,5 +1,5 @@
 import os
-from virtual_assistant import desktop_assistant, user, speak, inputCommand
+from CommonFunctions import desktop_assistant, user, speak, inputCommand
 
 def find_file_path():
     print(desktop_assistant + ": What is th file name?")

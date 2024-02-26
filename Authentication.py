@@ -1,11 +1,12 @@
-from virtual_assistant import desktop_assistant, speak, user, inputCommand, authorized_password
+from CommonFunctions import desktop_assistant, speak, user
+from config import authorized_password
 
 def authenticate(max_attempts=3):
     attempts = 0
     while attempts < max_attempts:
         print(desktop_assistant + ": Whats the password?")
         speak("Whats the password?")
-        password = inputCommand().replace(" ", "")
+        password = input("Type Your Password to Authenticate yourself: ")
         print(f"{user}: {password}")
         if password.lower() == authorized_password:
             print("Authentication successful. Starting the virtual assistant.")

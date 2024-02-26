@@ -1,5 +1,5 @@
 from nltk.corpus import wordnet
-from virtual_assistant import desktop_assistant, speak, user, inputCommand
+from CommonFunctions import desktop_assistant, speak, user, inputCommand
 
 def meaning_of_the_word():
     print(desktop_assistant + ":Which word do I need to explain its meaning for?!")

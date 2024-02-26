@@ -1,5 +1,5 @@
 from translate import Translator
-from virtual_assistant import desktop_assistant, user, speak, inputCommand
+from CommonFunctions import desktop_assistant, user, speak, inputCommand
 
 def perform_translation():
     print(desktop_assistant + ": What is the original language to be translated?")

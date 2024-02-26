@@ -1,4 +1,4 @@
-from virtual_assistant import desktop_assistant, speak, inputCommand, user
+from CommonFunctions import desktop_assistant, speak, inputCommand, user
 from googlesearch import search
 import webbrowser as wb
 

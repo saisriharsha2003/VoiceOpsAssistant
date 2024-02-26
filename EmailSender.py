@@ -1,5 +1,5 @@
 import pywhatkit
-from virtual_assistant import speak, desktop_assistant, user, inputCommand
+from CommonFunctions import speak, desktop_assistant, user, inputCommand
 
 def send_mail():
     print(desktop_assistant + ": Sir, To whom should I write an email?")

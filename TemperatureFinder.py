@@ -1,6 +1,6 @@
 import requests
 from config import owmapikey
-from virtual_assistant import speak,inputCommand, desktop_assistant, user
+from CommonFunctions import speak,inputCommand, desktop_assistant, user
 
 def get_temperature_of_city():
     print(desktop_assistant + ": For which location you need its temperature Sir?")

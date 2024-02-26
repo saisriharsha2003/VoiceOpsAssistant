@@ -1,5 +1,5 @@
 import pyautogui
-from virtual_assistant import desktop_assistant, speak
+from CommonFunctions import desktop_assistant, speak
 
 def screenshot():
     print(desktop_assistant + ": Hold the Screen for few seconds.let me take the screenshot")

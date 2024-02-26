@@ -1,5 +1,5 @@
 import pywhatkit
-from virtual_assistant import inputCommand, speak, desktop_assistant, user
+from CommonFunctions import inputCommand, speak, desktop_assistant, user
 
 def play_video_in_youtube():
     print(desktop_assistant + ": which video or movie should i play for you sir?")

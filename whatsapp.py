@@ -1,6 +1,6 @@
 import pywhatkit
 import vobject
-from virtual_assistant import desktop_assistant, inputCommand, speak, user
+from CommonFunctions import desktop_assistant, inputCommand, speak, user
 
 def send_whatsapp_message():
     print(desktop_assistant + ": For whom should i send the message?")

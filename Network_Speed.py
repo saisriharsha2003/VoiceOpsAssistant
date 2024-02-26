@@ -1,5 +1,5 @@
 import speedtest
-from virtual_assistant import speak, inputCommand, desktop_assistant
+from CommonFunctions import speak, inputCommand, desktop_assistant
 
 def check_network_speed():
     st = speedtest.Speedtest()
