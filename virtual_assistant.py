@@ -2,19 +2,19 @@ import datetime
 from fuzzywuzzy import fuzz
 import yaml
 import speech_recognition as sr
-from Wish import wish_and_time
-from Authentication import authenticate
-from Web_Browsing import chrome_search
-from Network_Speed import check_network_speed
-from TemperatureFinder import get_temperature_of_city
-from WordMeaning import meaning_of_the_word
-from EmailSender import send_mail
-from Translate import perform_translation
-from FindingFilePath import find_file_path
-from Whatsapp import send_whatsapp_message
-from CapturePhoto import capture_photo
-from Screenshot import screenshot
-from YoutubeVideo import play_video_in_youtube
+from Features.Wish import wish_and_time
+from Features.Authentication import authenticate
+from Features.Web_Browsing import chrome_search
+from Features.Network_Speed import check_network_speed
+from Features.TemperatureFinder import get_temperature_of_city
+from Features.WordMeaning import meaning_of_the_word
+from Features.EmailSender import send_mail
+from Features.Translate import perform_translation
+from Features.FindingFilePath import find_file_path
+from Features.Whatsapp import send_whatsapp_message
+from Features.CapturePhoto import capture_photo
+from Features.Screenshot import screenshot
+from Features.YoutubeVideo import play_video_in_youtube
 from CommonFunctions import  inputCommand1, speak, user
 
 
@@ -22,7 +22,7 @@ def calculate_similarity(input_text, examples):
     return max(fuzz.ratio(input_text.lower(), example.lower()) for example in examples)
 
 def finding_intents(user_input):
-    with open("intents.yaml", "r") as yaml_file:
+    with open("C:\\Users\\ranke\\Harsha\\Projects\\harsha-desktop-virtual-assisstant\\ML Model\\intents.yaml", "r") as yaml_file:
         intents_data = yaml.safe_load(yaml_file)
     best_intent = None
     max_similarity = 0

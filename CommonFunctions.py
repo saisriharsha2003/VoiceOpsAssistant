@@ -17,11 +17,11 @@ def inputCommand():
     count = 0
     while count < 1:
         with sr.Microphone() as source:
-            rec.pause_threshold = 0.5
+            rec.pause_threshold = 1
             rec.adjust_for_ambient_noise(source)
             audio = rec.listen(source)
             try:
-                query = rec.recognize_sphinx(audio, language="en-IN")
+                query = rec.recognize_google(audio, language="en-IN")
                 count += 1
             except Exception:
                 print(desktop_assistant + ": Sorry,I can't hear you!")
