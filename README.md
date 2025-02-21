@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ````
 ```bash
 # Run the Assistant
-python desktop_assistant.py
+python virtual_assistant.py
 ```
 
 
